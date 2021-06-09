@@ -5,6 +5,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 namespace d03.Nasa.NeoWs
 {
@@ -18,6 +19,10 @@ namespace d03.Nasa.NeoWs
 				HttpGetAsync<JsonDocument>($"https://api.nasa.gov/neo/rest/v1/feed?start_date={ar.StartDate:dddd-mm-dd}&end_date={ar.EndDate:dddd-mm-dd}&api_key={ApiKey}");
 			var neo = jsondoc.RootElement.GetProperty("near_earth_objects");
 			var dict = JsonSerializer.Deserialize<Dictionary<DateTime, AsteroidInfo[]>>(neo.GetRawText());
+			var dictreq =
+				from item in dict.Values
+				orderby item[0].Distance ascending
+				select item;
 
 			return await HttpGetAsync<AsteroidLookup[]>("");
 		}

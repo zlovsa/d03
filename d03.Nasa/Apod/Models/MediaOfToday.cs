@@ -16,8 +16,8 @@ namespace d03.Nasa.Apod.Models
 		public string Url { get; set; }
 
 		public override string ToString() => $"{Date:d}{Environment.NewLine}"
-			+ $"'{Title}' by {Copyright}{Environment.NewLine}"
-			+ $"{Explanation}{Environment.NewLine}"
+			+ $"'{Title}'" + (Copyright!=null ? $" by {Copyright}":"")
+			+ $"{Environment.NewLine}{Explanation}{Environment.NewLine}"
 			+ $"{Url}{Environment.NewLine}";
 
 	}

@@ -15,7 +15,9 @@ namespace d03.Nasa.NeoWs.Models
 			{
 				public double Kilometers { get; set; }
 			}
+			public MissDistance Miss_distance { get; set; }
 		}
+		public double Distance => Close_approach_data.Miss_distance.Kilometers;
 		public CloseApproachData Close_approach_data { get; set; }
 	}
 }
