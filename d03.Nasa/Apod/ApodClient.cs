@@ -16,8 +16,8 @@ namespace d03.Nasa.Apod
 		public ApodClient(string apiKey) : base(apiKey) {
 		}
 
-		public Task<MediaOfToday[]> GetAsync(int resultCount) {
-			var apodTask =
+		public async Task<MediaOfToday[]> GetAsync(int resultCount) {
+			var apodTask = await
 				HttpGetAsync<MediaOfToday[]>($"https://api.nasa.gov/planetary/apod?api_key={ApiKey}&count={resultCount}");
 			return apodTask;
 		}
